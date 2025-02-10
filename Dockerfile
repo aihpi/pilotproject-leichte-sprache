@@ -10,9 +10,6 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY app.py .
 COPY leichtesprache/ ./leichtesprache/
 
-# Create exports directory
-RUN mkdir -p exports
-
 # Expose Gradio port
 EXPOSE 7860
 
@@ -20,4 +17,4 @@ EXPOSE 7860
 ENV GRADIO_SERVER_NAME=0.0.0.0
 
 # Start
-CMD ["python3", "app.py"] 
+CMD ["python3", "app.py"]

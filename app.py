@@ -12,7 +12,9 @@ pinfo = {
 
 AVBL_LLMS = list_local_models()
 AVBL_LLM_CHOICES = sorted(list(set(p.LLM_CHOICES) & set(AVBL_LLMS)))
-DEFAULT_MODEL = p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if AVBL_LLM_CHOICES else None)
+DEFAULT_MODEL = (
+    p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if AVBL_LLM_CHOICES else None)
+)
 
 ls_ui = gr.Interface(
     simplify_text,
@@ -21,11 +23,9 @@ ls_ui = gr.Interface(
         label="Leichte Sprache", lines=17, autoscroll=True, show_label=True, show_copy_button=True
     ),
     title="KI-Prototyp: Leichte Sprache für die Verwaltung",
-    description="Simplify Text with LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Check the repository</a>",
+    description="Simplify Text with LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Check the repository to install it locally</a>",
     examples=[[p.EXAMPLE, DEFAULT_MODEL, p.USE_RULES, 5, 0.9, 0.3]],
-    flagging_mode="manual",
-    flagging_dir=p.EXPORT_PATH,
-    flagging_options=[("Export", "export")],
+    flagging_mode="never",
     additional_inputs=[
         gr.Dropdown(
             choices=AVBL_LLM_CHOICES, value=DEFAULT_MODEL, label="Model", allow_custom_value=True
