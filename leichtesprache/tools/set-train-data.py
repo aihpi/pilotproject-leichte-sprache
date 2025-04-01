@@ -2,7 +2,7 @@ import logging, os
 import pandas as pd
 import json
 from typing import List, Dict
-from leichtesprache.prompts import PROMPT_TEMPLATE_BASIC
+from leichtesprache.prompts import PROMPT_TEMPLATE_FOR_DATASET
 import argparse
 
 logging.basicConfig(format=os.getenv("LOG_FORMAT", "%(asctime)s [%(levelname)s] %(message)s"))
@@ -66,7 +66,7 @@ def format_dataframe_to_chatml_dataset(
         {
             "messages": [
                 {
-                    "content": PROMPT_TEMPLATE_BASIC.format(text=row_dict[input_header]),
+                    "content": PROMPT_TEMPLATE_FOR_DATASET.format(text=row_dict[input_header]),
                     "role": "user",
                 },
                 {"content": row_dict[target_header], "role": "assistant"},
@@ -90,7 +90,7 @@ def format_dataframe_to_alpaca_dataset(
     """
     return [
         {
-            "instruction": PROMPT_TEMPLATE_BASIC.format(text=row[input_header]),
+            "instruction": PROMPT_TEMPLATE_FOR_DATASET.format(text=row[input_header]),
             input_header: "",
             target_header: row[target_header],
         }
