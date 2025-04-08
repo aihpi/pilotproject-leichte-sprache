@@ -22,7 +22,7 @@ ls_ui = gr.Interface(
     ),
     title="KI-Prototyp: Leichte Sprache für die Verwaltung",
     description="Simplify Text with LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Check the repository</a>",
-    examples=[[p.EXAMPLE, DEFAULT_MODEL, False, 5, 0.9, 0.3]],
+    examples=[[p.EXAMPLE, DEFAULT_MODEL, p.USE_RULES, 5, 0.9, 0.3]],
     flagging_mode="manual",
     flagging_dir=p.EXPORT_PATH,
     flagging_options=[("Export", "export")],
@@ -30,7 +30,11 @@ ls_ui = gr.Interface(
         gr.Dropdown(
             choices=AVBL_LLM_CHOICES, value=DEFAULT_MODEL, label="Model", allow_custom_value=True
         ),
-        gr.Checkbox(value=p.USE_RULES, label="Use Rules", info="Use rules for simplification"),
+        gr.Checkbox(
+            value=p.USE_RULES,
+            label="Advanced Prompt (Use Rules)",
+            info="Use rules for simplification",
+        ),
         gr.Slider(1, 10, value=p.TOP_K, step=1, label="Top k", info=pinfo.get("Top k")),
         gr.Slider(
             0.1, 1, value=p.TOP_P, step=0.1, label="Top p", info=pinfo.get("Top p"), visible=False
