@@ -99,7 +99,7 @@ ls_ui = gr.Interface(
         label="Leichte Sprache", lines=17, autoscroll=True, show_label=True, show_copy_button=True
     ),
     #title="KI-Prototyp: Leichte Sprache für die Verwaltung",
-    title="KI-Prototyp für Leichte Sprache Assistent (LeiSA)",
+    title="KI-Prototyp Leichte-Sprache-Assistent (LeiSA)",
     #uebersetzt
     description="Vereinfache Texte mit LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Zum Projekt auf GitHub</a>",
     #examples=[[p.EXAMPLE, DEFAULT_MODEL, p.USE_RULES, 5, 0.9, 0.3]], # kompletter Examples-Bereich im Frontend
