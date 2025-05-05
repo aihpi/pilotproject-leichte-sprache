@@ -95,4 +95,4 @@ $ export LOG_LEVEL='DEBUG'
 
 ![BMBF_non_transparent.jpeg](images/BMBF_non_transparent.jpeg) 
 
-This is an artefact from a collaboration between DigitalAgentur Brandenburg and KI-Servicezentrum Berlin-Brandenburg. DigitalAgentur Brandenburg is funded by the Ministry for Economic Affairs, Labour and Energy of the State of Brandenburg. KI-Servicezentrum Berlin-Brandenburg is funded by the Federal Ministry of Education and Research under the funding code 01IS22092.
+This is an artefact from a collaboration between [DigitalAgentur Brandenburg](https://www.digital-agentur.de/schwerpunkte/mit-kuenstlicher-intelligenz-mehrwerte-schaffen/leichte-sprache-assistent/) and [KI-Servicezentrum Berlin-Brandenburg](https://hpi.de/kisz). DigitalAgentur Brandenburg is funded by the Ministry for Economic Affairs, Labour and Energy of the State of Brandenburg. KI-Servicezentrum Berlin-Brandenburg is funded by the Federal Ministry of Education and Research under the funding code 01IS22092.
