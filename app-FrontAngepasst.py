@@ -20,7 +20,19 @@ DEFAULT_MODEL = p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if A
 # Barrierefreiheit (analog Bsp. Bernau) - Kontrast (3 Modi) + Schriftgroessenaenderung + runde Buttons
 # =======================================================
 
-
+# ============================================================
+# Platzhalter Logo (optional)
+# ============================================================
+logo_placeholder = gr.HTML(
+    """
+    <!-- Logo kann hier eingefuegt werden -->
+    <!-- Bsp:
+    <div style='text-align: center; margin-bottom: 10px;'>
+        <img src='pfad-zum-logo.png' alt='Logo' style='heigth:80px;'>
+    </div>
+    -->
+    """
+)
 
 # ==============================================================
 # Hauptinterface
