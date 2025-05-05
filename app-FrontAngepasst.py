@@ -20,8 +20,7 @@ DEFAULT_MODEL = p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if A
 # Barrierefreiheit (analog Bsp. Bernau) - Kontrast (3 Modi) + Schriftgroessenaenderung + runde Buttons
 # =======================================================
 
-# Schriftgroessenaenderung funktioniert, wenn hart gecodet -> dynamisch funktioniert noch nict
-# http://127.0.0.1:7861/        -> LeiSA Frontend meine Anpassungen
+
 
 # ==============================================================
 # Hauptinterface
@@ -65,6 +64,9 @@ with gr.Blocks(css="""
             }
 """) as demo:
     gr.HTML("""
+    <style>
+        footer {visibility: hidden;}
+    </style>
         <script>
         window.addEventListener('DOMContentLoaded', () => {
             window.currentFontScale = 1.0;
