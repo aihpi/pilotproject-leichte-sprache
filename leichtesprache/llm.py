@@ -12,7 +12,7 @@ logger.setLevel(os.getenv("LOG_LEVEL", logging.INFO))
 
 
 def llm_generate(
-    prompt: str, model: str = MODEL, top_k: int = 5, top_p: float = 0.9, temp: float = 0.2
+    prompt: str, model: str = MODEL, top_k: int = 2, top_p: float = 0.9, temp: float = 0.2  # Parameterwerte angepasst (Stand 30.04.2025)
 ) -> str:
     url = urljoin(LLMBASEURL, "generate")
     data = {
