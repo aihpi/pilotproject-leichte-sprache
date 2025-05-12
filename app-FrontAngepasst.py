@@ -17,38 +17,33 @@ DEFAULT_MODEL = p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if A
 
 
 # =======================================================
-# Barrierefreiheit (analog Bsp. Bernau) - Kontrast (3 Modi) + Schriftgroessenaenderung + runde Buttons
+# BLogo LeiSA - dunkelblau
 # =======================================================
 
+with gr.Blocks(css="footer {visibility: hidden}") as demo:
+
+    # Logo
+    logo_placeholder = gr.HTML("""
+        <div style='text-align: left; margin-bottom: 20px;'>
+            <img src='images/Logo-LeiSA-dunkelblau.png' alt='Logo' style='max-heigth: 90px;'>
+        </div>
+    """)
 
 
-# ============================================================
-# Platzhalter Logo (optional)
-# ============================================================
-logo_placeholder = gr.HTML(
-    """
-    <!-- Logo kann hier eingefuegt werden -->
-    <!-- Bsp:
-    <div style='text-align: center; margin-bottom: 10px;'>
-        <img src='pfad-zum-logo.png' alt='Logo' style='heigth:80px;'>
-    </div>
-    -->
-    """
-)
-
-
-# ==============================================================
-# Hauptinterface
-# ==============================================================
-
-
-
-with gr.Blocks(css="""
-    :root {
+# =======================================================
+# Barrierefreiheit (analog Bsp. Bernau) - Kontrast (3 Modi) + Schriftgroessenaenderung + runde Buttons
+# =======================================================
+    gr.HTML("""
+        <style>
+            :root {
                 --font-scale: 1;
             }
+            html {
+                filter: none;
+                transition: filter 0.3s ease;
+            }
 
-            body, .gr-block, .gr-box, .gr.label, .gr-textbox, .gr-button, .gr-slider, .gr-accordion {
+            body, input, textarea, button {
                 font-size: calc(16px * var(--font-scale));
             }
 
@@ -57,7 +52,7 @@ with gr.Blocks(css="""
                 justify-content: center;
                 flex-wrap: wrap;
                 gap: 12px;
-                margin-bottom: 20px;
+                margin-bottom: 25px;
             }
 
             .accessibility-button{
@@ -77,63 +72,59 @@ with gr.Blocks(css="""
                 border-color: white;
                 cursor: pointer;
             }
-""") as demo:
-    gr.HTML("""
-    <style>
-        footer {visibility: hidden;}
-    </style>
-        <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            window.currentFontScale = 1.0;
-
-            window.updateFontSize = function() {
-                 document.documentElement.style.setProperty('--font-scal', window.currentFontScale.toFixed(2));
+            
+            #output-box .copy-button {
+                font-size: 18px !important;
+                padding: 8px 16px !important;
             }
-
-            window.increaseFontSize = function () {
-                window.currentFontScale += 0.1;
-                window.updateFontSize();
-            }
-            window.resetFontSize = function() {
-                window.currentFontScale = 1;
-                window.updateFontSize();
-            }
-            window.decreaseFontSize = function() {
-                window.currentFontScale = Math.max(0.5, currentFontScale - 0.1);
-                window.updateFontSize();
-            }
-            document.documentElement.style.setProperty('--font-scale', currentFontScale.toFixed(2));   
-        });
-        </script>
+        </style>
 
         <div id="accessibility-bar">
             <button class="accessibility-button" onclick="document.body.style.filter='none';">Kontrast: Normal</button>
             <button class="accessibility-button" onclick="document.body.style.filter='invert(1)';">Kontrast: Invertiert</button>
             <button class="accessibility-button" onclick="document.body.style.filter='grayscale(1)';">Kontrast: Graustufen</button>
-            <button class="accessibility-button" onclick="window.increaseFontSize()">A+</button>
+            <button class="accessibility-button" onclick="window.adjustFontSize(0.1)">A+</button>
             <button class="accessibility-button" onclick="window.resetFontSize()">A</button>
-            <button class="accessibility-button" onclick="window.decreaseFontSize()">A-</button>
+            <button class="accessibility-button" onclick="window.adjustFontSize(-0.1)">A-</button>
         </div>
+
+        <script>
+            function adjustFontSize(delta) {
+                let root = document.documentElement;
+                let current = parseFloat(getComputedStyle(root).getPropertyValue('--font-scale')) || 1;
+                let newScale = Math.max(0.5, Math.min(2, current + delta));
+                root.style.setProperty('--font-scale', newScale);
+            }
+        </script>
     """)
+
+# ==============================================================
+# Hauptinterface
+# ==============================================================
 
     simplify_text,
 
     gr.Markdown("<h2 style='text-align: center;'>KI-Prototyp Leichte-Sprache-Assistent (LeiSA)</h2>")
     gr.Markdown("Vereinfache Texte mit LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Zum Projekt auf GitHub</a>")
 
+# Beispiel rausgenommen
     #examples=[[p.EXAMPLE, DEFAULT_MODEL, p.USE_RULES, 5, 0.9, 0.3]], # kompletter Examples-Bereich im Frontend
+# Export-Button rausgenommen
     #Export-Button Funktion ausblenden: (Originalcode -> neuen Code)
     #flagging_mode="manual",
     #flagging_dir=p.EXPORT_PATH,
     #flagging_options=[("Export", "export")],
     flagging_mode="never",  # Export Button deaktiviert
 
+# Eingabetext u. Ausgabetext (in leichte Sprache)
     with gr.Row():
         input_text = gr.Textbox(label="Originaltext", lines = 17, autoscroll=True)
-        output_text = gr.Textbox(label="Leichte Sprache", lines=17, autoscroll=True, show_copy_button=True)
+        output_text = gr.Textbox(label="Leichte Sprache", lines=17, autoscroll=True, show_copy_button=False, elem_id ="output-box")
 
-    
+    gr.Markdown("Hinweis zur Übersetzung: Dieser Text wurde mit einer KI erstellt.")
 
+            
+# ausklappbare Einstellungen ausgeblendet vom Frontend
     with gr.Accordion(label="Einstellungen", open=False, visible=False):
         model = gr.Dropdown(choices=AVBL_LLM_CHOICES, value=DEFAULT_MODEL, label="KI-Modell auswählen", allow_custom_value=True)
         use_rules = gr.Checkbox(value=p.USE_RULES, label="Advanced Prompt (verwende Regeln)", info="Verwende die Regeln zur Vereiinfachung", visible=False)
@@ -141,21 +132,33 @@ with gr.Blocks(css="""
         top_p = gr.Slider(0.1, 1, value=p.TOP_P, step=0.1, label="Top p", info=pinfo.get("Top p"))
         temp = gr.Slider(0.1, 10, value=p.TEMP, step=0.1, label ="Temp", info=pinfo.get("Temp"))
 
-
+# Buttons: Vereinfachen, Kopieren und Loeschen
     with gr.Row():
         vereinfachen_btn = gr.Button("Vereinfachen!", variant="primary")
         vereinfachen_btn.click(fn=simplify_text, inputs=[input_text, model, use_rules, top_k, temp], outputs=[output_text])
         clear_button = gr.Button("Löschen", variant="secondary")
         #clear_button.click(fn=lambda: "", outputs=input_text)   #leert nur Eingabe-Textbox
         clear_button.click(fn=lambda: ("", ""), outputs=[input_text, output_text])  # leert beide Textfelder
+        copy_btn = gr.Button("Kopieren", elem_id="copy_btn")
+
+#Hinweis: Parameter bleiben unveraendert bei dieser Definition des clear-buttons
+    
+                
+# ==============================================================
+# Footer
+# ==============================================================
         
-   
+    gr.HTML("""
+        <div style="text-align: center; margin-top: 40px;">
+            <p style="font-size: 12px; color: #666;">Der KI-Prototyp LeiSA ist ein gemeinsames Projekt der DigitalAgentur Brandenburg GmbH<sup>1</sup> und des KI-Servicezentrums (KISZ) vom Hasso-Plattner-Institut<sup>2</sup></p>
+            <p style="font-size: 10px; color: #999;"><sup>1</sup>Gefördert durch das Ministerium der Justiz und für Digitalisierung des Landes Brandenburg.</p>
+            <p style="font-size: 10px; color: #999;"><sup>2</sup>Gefördert vom Bundesministerium für Bildung und Forschung.</p>
+        </div>
+    """)
 
-
-
+# Start
 if __name__ == "__main__":
-
     demo.launch(server_port=7862,	#Original auf Port 7860 -> somit nicht ueberschrieben
-        inbrowser=True,			# automatisch Browser oeffnen
-        share=False
-    )
+    inbrowser=True,			        # automatisch Browser oeffnen
+    share=False
+)
