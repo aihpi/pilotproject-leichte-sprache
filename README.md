@@ -27,6 +27,19 @@ Follow the [installation instructions](docs/installation.md)
 
 ---
 
+## Frontend Variants
+
+Two different frontends are available in this expanded version of the repository:
+
+- app.py – A simplified frontend for use by users without prior technical knowledge.
+- app-Front-technisch.py – An advanced frontend for technical developers with access to advanced settings and test scenarios.
+
+Both frontends use the same backend logic but differ in structure and presentation. Switching between the two versions is done by calling the correct file in the terminal with the following command
+
+```shell
+$ python3 [name-of-file].py
+```
+
 ### Usage
 
 - Start the tool [\*]
