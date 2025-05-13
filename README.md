@@ -54,14 +54,15 @@ $ python3 [name-of-file].py
 
 - Open the provided URL on your web browser
 - Write or paste a text to simplify
+- adjust the contrast or font size if necessary
 - Enjoy
 
-### Key Settings
+### Key Settings (Advanced Frontend)
 
 - **Model**: Select the desired [Model](docs/info_models_versions.md)
 - **Use Rules** (checkbox): Click for adding Leichte Sprache rules to the prompt sent to the LLM. 
 
-#### Additional Input parameters for the LLMs
+#### Additional Input parameters for the LLMs (Advanced Frontend)
 
 - Top k: Ranks the output tokens in descending order of probability, selects the first k tokens to create a new distribution, and it samples the output from it. Higher values result in more diverse answers, and lower values will produce more conservative answers.
 
