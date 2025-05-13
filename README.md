@@ -45,7 +45,7 @@ $ python3 [name-of-file].py
 - Start the tool [\*]
 
 ```shell
-$ python3 app.py
+$ python3 [name-of-file].py
 ```
 
 - Open the provided URL on your web browser
