@@ -16,20 +16,13 @@ AVBL_LLMS = list_local_models()
 AVBL_LLM_CHOICES = sorted(list(set(p.LLM_CHOICES) & set(AVBL_LLMS)))
 DEFAULT_MODEL = p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if AVBL_LLM_CHOICES else None)
 
-
 # =======================================================
 #  Logo LeiSA - dunkelblau
 # =======================================================
 
 with gr.Blocks(css="footer {visibility: hidden}") as demo:
 
-    # Logo
-    logo_placeholder = gr.HTML("""
-        <div style='text-align: left; margin-bottom: 20px;'>
-            <img src='images/Logo-LeiSA-dunkelblau.png' alt='Logo' style='max-heigth: 90px;'>
-        </div>
-    """)
-
+    gr.Image(value="images/Logo-LeiSA-hellblau.png", show_label=False, height=80, elem_id="logo")
 
 # ======================================================================================================
 # Barrierefreiheit (analog Bsp. Bernau) - Kontrast (3 Modi) + Schriftgroessenaenderung + runde Buttons
@@ -51,7 +44,9 @@ with gr.Blocks(css="footer {visibility: hidden}") as demo:
             #accessibility-bar {
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 flex-wrap: wrap;
+                width: 100%;
                 gap: 12px;
                 margin-bottom: 25px;
             }
@@ -72,6 +67,10 @@ with gr.Blocks(css="footer {visibility: hidden}") as demo:
                 color: #0A286D;
                 border-color: white;
                 cursor: pointer;
+            }
+
+            #logo {
+                max-width: 100px;
             }
             
             #output-box .copy-button {
@@ -108,7 +107,23 @@ with gr.Blocks(css="footer {visibility: hidden}") as demo:
 # Eingabetext u. Ausgabetext (in leichte Sprache)
     with gr.Row():
         input_text = gr.Textbox(label="Originaltext", lines = 17, autoscroll=True)
-        output_text = gr.Textbox(label="Leichte Sprache", lines=17, autoscroll=True, show_copy_button=False, elem_id ="output-box")
+        output_text = gr.Textbox(label="Leichte Sprache", lines=17, autoscroll=True, show_copy_button=True, elem_id ="output-box")
+        copy_box = gr.Textbox(visible=False)
+
+    gr.HTML("""
+            <style>
+                #output-box .svelte-1ipelgc {
+                    transform: scale(1.3);
+                    filter: drop-shadow(0 0 3px orange);
+                    color: orange;
+                    transition: 0.2s ease;
+                }
+
+               #output-box .svelte-1ipelgc:hover {
+                background-color: #ffe8cc;
+               } 
+            </style>
+        """)
 
     gr.Markdown("Hinweis zur Übersetzung: Dieser Text wurde mit einer KI erstellt.")
     gr.Markdown("Bitte verarbeiten Sie keine personenbezogenen Daten mit dem Tool. Falls der Prototyp einmal nicht verfügbar sein sollte, kontaktieren Sie uns gern, wir kümmern uns darum.")
@@ -129,7 +144,6 @@ with gr.Blocks(css="footer {visibility: hidden}") as demo:
         clear_button = gr.Button("Löschen", variant="secondary")
         #clear_button.click(fn=lambda: "", outputs=input_text)   #leert nur Eingabe-Textbox
         clear_button.click(fn=lambda: ("", ""), outputs=[input_text, output_text])  # leert beide Textfelder
-        copy_btn = gr.Button("Kopieren", elem_id="copy_btn")
 
 #Hinweis: Parameter bleiben unveraendert bei dieser Definition des clear-buttons
     
@@ -148,7 +162,4 @@ with gr.Blocks(css="footer {visibility: hidden}") as demo:
 
 # Start
 if __name__ == "__main__":
-    demo.launch(server_port=7862,	#Original auf Port 7860 -> somit nicht ueberschrieben
-    inbrowser=True,			        # automatisch Browser oeffnen
-    share=False
-)
+    demo.launch()
