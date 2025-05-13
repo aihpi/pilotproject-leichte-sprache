@@ -20,7 +20,7 @@ DEFAULT_MODEL = (
 
 
 # =======================================================
-#  Logo LeiSA - dunkelblau
+#  Logo LeiSA - hellblau
 # =======================================================
 
 with gr.Blocks(css="footer {visibility: hidden}") as demo:
