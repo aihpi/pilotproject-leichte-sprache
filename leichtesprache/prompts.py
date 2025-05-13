@@ -9,7 +9,7 @@ Beachte stets die genannten Kriterien für Leichte Sprache.
 
 PROMPT_TEMPLATE_BASIC = """
 Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf Deutsch Sprachniveau A2 um.
-Verwende ausschließlich Informationen aus dem Originaltext. Mache keinie Annahmen. FÜge keine zusätzlichen Erklärungen hinzu.
+Verwende ausschließlich Informationen aus dem Originaltext. Mache keine Annahmen. Füge keine zusätzlichen Erklärungen hinzu.
 
 Text:
 {text}
@@ -17,7 +17,7 @@ Text:
 
 PROMPT_TEMPLATE = """
 Bitte schreibe den folgenden schwer verständlichen Text unter Berücksichtigung der genannten Kriterien vollständig in Leichte Sprache um.
-Verwende ausschließlich Informationen aus dem Originaltext. Mache keinie Annahmen. FÜge keine zusätzlichen Erklärungen hinzu.
+Verwende ausschließlich Informationen aus dem Originaltext. Mache keine Annahmen. Füge keine zusätzlichen Erklärungen hinzu.
 
 Text:
 {text}
