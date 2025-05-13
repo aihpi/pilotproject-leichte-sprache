@@ -37,7 +37,11 @@ Two different frontends are available in this expanded version of the repository
 Both frontends use the same backend logic but differ in structure and presentation. Switching between the two versions is done by calling the correct file in the terminal with the following command
 
 ```shell
-$ python3 [name-of-file].py
+$ python3 app.py
+```
+or (for the advanced frontend)
+```shell
+$ python3 ls_ui.py
 ```
 
 ### Usage
