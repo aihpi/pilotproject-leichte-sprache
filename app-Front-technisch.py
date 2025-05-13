@@ -12,7 +12,9 @@ pinfo = {
 
 AVBL_LLMS = list_local_models()
 AVBL_LLM_CHOICES = sorted(list(set(p.LLM_CHOICES) & set(AVBL_LLMS)))
-DEFAULT_MODEL = p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if AVBL_LLM_CHOICES else None)
+DEFAULT_MODEL = (
+    p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if AVBL_LLM_CHOICES else None)
+)
 
 ls_ui = gr.Interface(
     simplify_text,
