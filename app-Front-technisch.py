@@ -2,6 +2,7 @@ import gradio as gr
 from leichtesprache.core import simplify_text
 from leichtesprache.llm import list_local_models
 import leichtesprache.parameters as p
+import sys
 
 
 pinfo = {
@@ -15,6 +16,9 @@ AVBL_LLM_CHOICES = sorted(list(set(p.LLM_CHOICES) & set(AVBL_LLMS)))
 DEFAULT_MODEL = (
     p.MODEL if (p.MODEL in AVBL_LLMS) else (AVBL_LLM_CHOICES[0] if AVBL_LLM_CHOICES else None)
 )
+if DEFAULT_MODEL is None:
+    print("Error: No language models available. Please install at least one model.")
+    sys.exit(1)
 
 ls_ui = gr.Interface(
     simplify_text,
@@ -24,7 +28,7 @@ ls_ui = gr.Interface(
     ),
     title="KI-Prototyp: Leichte Sprache für die Verwaltung",
     description="Simplify Text with LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Check the repository</a>",
-    examples=[[p.EXAMPLE, DEFAULT_MODEL, p.USE_RULES, 5, 0.9, 0.3]],
+    examples=[[p.EXAMPLE, DEFAULT_MODEL, p.USE_RULES, 2, 0.9, 0.3]],
     flagging_mode="manual",
     flagging_dir=p.EXPORT_PATH,
     flagging_options=[("Export", "export")],

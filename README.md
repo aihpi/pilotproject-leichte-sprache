@@ -41,7 +41,7 @@ $ python3 app.py
 ```
 or (for the advanced frontend)
 ```shell
-$ python3 ls_ui.py
+$ python3 app-Front-technisch.py
 ```
 
 ### Usage
