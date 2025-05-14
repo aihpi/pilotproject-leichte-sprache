@@ -9,7 +9,7 @@ pinfo = {
     # uebersetzt
     "Top k": "LLM-Parameter. Ein höherer Wert erzeugt einen abwechslungsreicheren Text",
     "Top p": "LLM-Parameter. Ein höherer Wert erzeugt einen abwechslungsreicheren Text",
-    "Temp": "LLM-Parameter. Ein höhere Wert erhöht die Zufälligkeit der Antwort",
+    "Temp": "LLM-Parameter. Ein höherer Wert erhöht die Zufälligkeit der Antwort",
 }
 
 AVBL_LLMS = list_local_models()
@@ -63,7 +63,7 @@ with gr.Blocks(css="footer {visibility: hidden}") as demo:
                 color: white;
                 font-size: 16px;
                 font-weight: bold;
-                transistion: all 0.3s ease;
+                transition: all 0.3s ease;
             }
 
             .accessibility-button:hover {
@@ -170,7 +170,7 @@ with gr.Blocks(css="footer {visibility: hidden}") as demo:
         vereinfachen_btn = gr.Button("Vereinfachen!", variant="primary")
         vereinfachen_btn.click(
             fn=simplify_text,
-            inputs=[input_text, model, use_rules, top_k, temp],
+            inputs=[input_text, model, use_rules, top_k, top_p, temp],
             outputs=[output_text],
         )
         clear_button = gr.Button("Löschen", variant="secondary")
