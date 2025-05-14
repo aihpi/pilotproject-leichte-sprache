@@ -27,24 +27,42 @@ Follow the [installation instructions](docs/installation.md)
 
 ---
 
+## Frontend Variants
+
+Two different frontends are available in this expanded version of the repository:
+
+- app.py – A simplified frontend for use by users without prior technical knowledge.
+- app-Front-technisch.py – An advanced frontend for technical developers with access to advanced settings and test scenarios.
+
+Both frontends use the same backend logic but differ in structure and presentation. Switching between the two versions is done by calling the correct file in the terminal with the following command
+
+```shell
+$ python3 app.py
+```
+or (for the advanced frontend)
+```shell
+$ python3 ls_ui.py
+```
+
 ### Usage
 
 - Start the tool [\*]
 
 ```shell
-$ python3 app.py
+$ python3 [name-of-file].py
 ```
 
 - Open the provided URL on your web browser
 - Write or paste a text to simplify
+- adjust the contrast or font size if necessary
 - Enjoy
 
-### Key Settings
+### Key Settings (Advanced Frontend)
 
 - **Model**: Select the desired [Model](docs/info_models_versions.md)
 - **Use Rules** (checkbox): Click for adding Leichte Sprache rules to the prompt sent to the LLM. 
 
-#### Additional Input parameters for the LLMs
+#### Additional Input parameters for the LLMs (Advanced Frontend)
 
 - Top k: Ranks the output tokens in descending order of probability, selects the first k tokens to create a new distribution, and it samples the output from it. Higher values result in more diverse answers, and lower values will produce more conservative answers.
 

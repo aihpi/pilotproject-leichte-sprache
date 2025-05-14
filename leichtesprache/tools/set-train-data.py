@@ -13,12 +13,33 @@ logger.setLevel(os.getenv("LOG_LEVEL", logging.INFO))
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Process a dataset for training and testing.")
     parser.add_argument('--file-name', type=str, default='dataset.csv', help='Dataset CSV file.')
-    parser.add_argument('--data-path', type=str, default='data', help='Base directory for data files.')
-    parser.add_argument('--train-fraction', type=float, default=0.8, help='Fraction of data to be used for training.')
-    parser.add_argument('--random-seed', type=int, default=42, help='Random seed for reproducibility.')
-    parser.add_argument('--input-header', type=str, default='input', help='Header name for input column.')
-    parser.add_argument('--target-header', type=str, default='output', help='Header name for target (output) column.')
-    parser.add_argument('--format', choices=['chatml', 'alpaca'], default='chatml', help="Output format: chatml or alpaca.")
+    parser.add_argument(
+        '--data-path', type=str, default='data', help='Base directory for data files.'
+    )
+    parser.add_argument(
+        '--train-fraction',
+        type=float,
+        default=0.8,
+        help='Fraction of data to be used for training.',
+    )
+    parser.add_argument(
+        '--random-seed', type=int, default=42, help='Random seed for reproducibility.'
+    )
+    parser.add_argument(
+        '--input-header', type=str, default='input', help='Header name for input column.'
+    )
+    parser.add_argument(
+        '--target-header',
+        type=str,
+        default='output',
+        help='Header name for target (output) column.',
+    )
+    parser.add_argument(
+        '--format',
+        choices=['chatml', 'alpaca'],
+        default='chatml',
+        help="Output format: chatml or alpaca.",
+    )
     parser.add_argument('--verbose', action='store_true', help='Increase output verbosity.')
     return parser.parse_args()
 
