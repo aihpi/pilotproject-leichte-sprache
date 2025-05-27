@@ -3,6 +3,17 @@
 
 # Leichte Sprache
 
+## Generelle Hinweise zur Nutzung dieses Prototypen / General Information on Usage of this Protoype
+
+Dieser Prototyp erstellt einen ersten Vorschlag für eine Version eines Textes in Leichter Sprache, der zum Beispiel an eine Übersetzerin oder einen Übersetzer für Leichte Sprache weitergegeben werden kann.
+Der generierte Text ist oft noch nicht perfekt. Wir empfehlen eine nachträgliche Prüfung auf inhaltliche Korrektheit und Verständlichkeit.
+Insbesondere ersetzt dieser Prototyp nicht die Prüfung durch Personen, die der Zielgruppe Leichter Sprache angehören.
+
+This prototype creates an initial proposal for a version of a text in simple language that can be passed to a translator for simple language.
+The generated text is often not yet perfect. We recommend a subsequent check for correctness of content and comprehensibility.
+In particular, this prototype does not replace checking by people who belong to the Simple Language target group.
+
+
 ## Simplify German language!
 
 Locally-run tool to simplify German into "Leichte Sprache" (easy language) based on Large Language Models (LLMs).
