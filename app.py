@@ -80,7 +80,7 @@ with gr.Blocks(title="LeiSA", css="footer {visibility: hidden}") as demo:
             
             #output-box .svelte-1ipelgc {
                 transform: scale(1.3);
-                filter: drop-shado(0 0 3px orange);
+                filter: drop-shadow(0 0 3px orange);
                 color: orange;
                 transition: 0.2s ease;
             }
