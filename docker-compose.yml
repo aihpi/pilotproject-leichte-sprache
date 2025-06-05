@@ -1,10 +1,6 @@
-name: leichtesprache-app
-
 services:
   app:
     build: .
-    ports:
-      - "7860:7860" #  Access locally on http://localhost:7860
     volumes:
       - ./exports:/app/exports
     network_mode: "host"  # Allows the container to access Ollama running on the host
