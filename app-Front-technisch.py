@@ -27,7 +27,7 @@ ls_ui = gr.Interface(
         label="Leichte Sprache", lines=17, autoscroll=True, show_label=True, show_copy_button=True
     ),
     title="KI-Prototyp: Leichte Sprache für die Verwaltung",
-    description="Simplify Text with LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Check the repository</a>",
+    description="Simplify Text with LLMs! - <a href='https://github.com/aihpi/pilotproject-leichte-sprache' target='_blank'>Check the repository</a>",
     examples=[[p.EXAMPLE, DEFAULT_MODEL, p.USE_RULES, 2, 0.9, 0.3]],
     flagging_mode="manual",
     flagging_dir=p.EXPORT_PATH,

@@ -114,7 +114,7 @@ with gr.Blocks(title="LeiSA", css="footer {visibility: hidden}") as demo:
     )
     # Verlinkung GitHub-Repo KISZ
     gr.Markdown(
-        "Vereinfache Texte mit LLMs! - <a href='https://github.com/aihpi/leichte-sprache' target='_blank'>Zum Projekt auf GitHub</a>"
+        "Vereinfache Texte mit LLMs! - <a href='https://github.com/aihpi/pilotproject-leichte-sprache' target='_blank'>Zum Projekt auf GitHub</a>"
     )
 
     # Beispiel rausgenommen
