@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: leichte-sprache
+  namespace: argocd
+spec:
+  project: leichte-sprache
+  source:
+    repoURL: https://github.com/aihpi/pilotproject-leichte-sprache.git
+    targetRevision: main
+    path: kubernetes
+    directory:
+      recurse: false
+      exclude: "argocd/**"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: leichte-sprache
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 5m

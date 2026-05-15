@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leichte-sprache
+  labels:
+    app: leichte-sprache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leichte-sprache
+  template:
+    metadata:
+      labels:
+        app: leichte-sprache
+    spec:
+      imagePullSecrets:
+        - name: ghcr-credentials
+      initContainers:
+        - name: model-setup
+          image: ollama/ollama:latest
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              ollama serve &
+              OLLAMA_PID=$!
+              until curl -sf http://localhost:11434/api/tags > /dev/null; do sleep 2; done
+              ollama pull llama3.1
+              ollama pull llama3.2
+              ollama create llama3.2-leichte-sprache:basic -f /modelfiles/Modelfile_llama32_LS_basic
+              ollama create llama3.2-leichte-sprache:fs -f /modelfiles/Modelfile_llama32_LS_fs
+              ollama create llama3.1-leichte-sprache:basic -f /modelfiles/Modelfile_llama31_LS_basic
+              ollama create llama3.1-leichte-sprache:fs -f /modelfiles/Modelfile_llama31_LS_fs
+              ollama pull kisz/llama3.2-leichte-sprache-ft:latest
+              ollama pull kisz/llama3.1-leichte-sprache-ft:latest
+              kill $OLLAMA_PID
+              wait $OLLAMA_PID 2>/dev/null || true
+          volumeMounts:
+            - name: ollama-models
+              mountPath: /root/.ollama
+            - name: modelfiles
+              mountPath: /modelfiles
+          resources:
+            requests:
+              memory: "8Gi"
+              cpu: "1000m"
+            limits:
+              memory: "16Gi"
+              cpu: "4000m"
+      containers:
+        - name: leichte-sprache
+          image: ghcr.io/aihpi/pilotproject-leichte-sprache:latest
+          imagePullPolicy: Always
+          env:
+            - name: OLLAMA_HOST
+              value: "http://localhost:11434"
+          ports:
+            - name: http
+              containerPort: 7860
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+        - name: ollama
+          image: ollama/ollama:latest
+          ports:
+            - name: ollama
+              containerPort: 11434
+          volumeMounts:
+            - name: ollama-models
+              mountPath: /root/.ollama
+          readinessProbe:
+            httpGet:
+              path: /api/tags
+              port: 11434
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/tags
+              port: 11434
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests:
+              memory: "8Gi"
+              cpu: "1000m"
+            limits:
+              memory: "16Gi"
+              cpu: "4000m"
+      volumes:
+        - name: ollama-models
+          persistentVolumeClaim:
+            claimName: ollama-models
+        - name: modelfiles
+          configMap:
+            name: ollama-modelfiles

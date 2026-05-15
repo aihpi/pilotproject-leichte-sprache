@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: leichte-sprache
+  namespace: argocd
+spec:
+  description: A Gradio app that simplifies German text into Leichte Sprache using local LLMs.
+  sourceRepos:
+    - https://github.com/aihpi/pilotproject-leichte-sprache.git
+  destinations:
+    - namespace: leichte-sprache
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespacedResourceWhitelist:
+    - group: ""
+      kind: "*"
+    - group: apps
+      kind: "*"
+    - group: networking.k8s.io
+      kind: "*"

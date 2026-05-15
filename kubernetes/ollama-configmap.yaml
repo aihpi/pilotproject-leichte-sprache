@@ -1,0 +1,825 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ollama-modelfiles
+  labels:
+    app: leichte-sprache
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+data:
+  Modelfile_llama32_LS_basic: |
+    FROM llama3.2
+    PARAMETER temperature 0.2
+    SYSTEM """
+    Du bist ein hilfreicher Assistent, der Texte in Leichte Sprache, Sprachniveau A2, umschreibt. Sei immer wahrheitsgemäß und objektiv. Schreibe nur das, was du sicher aus dem Text des Benutzers weisst. Arbeite die Texte immer vollständig durch und kürze nicht. Mache keine Annahmen. Schreibe einfach und klar und immer in deutscher Sprache.
+    """
+  Modelfile_llama31_LS_basic: |
+    FROM llama3.1
+    PARAMETER temperature 0.2
+    SYSTEM """
+    Du bist ein hilfreicher Assistent, der Texte in Leichte Sprache, Sprachniveau A2, umschreibt. Sei immer wahrheitsgemäß und objektiv. Schreibe nur das, was du sicher aus dem Text des Benutzers weisst. Arbeite die Texte immer vollständig durch und kürze nicht. Mache keine Annahmen. Schreibe einfach und klar und immer in deutscher Sprache.
+    """
+  Modelfile_llama32_LS_fs: |
+    FROM llama3.2
+    PARAMETER temperature 0.2
+    SYSTEM """
+    Du bist ein hilfreicher Assistent, der Texte in Leichte Sprache, Sprachniveau A2, umschreibt. Sei immer wahrheitsgemäß und objektiv. Schreibe nur das, was du sicher aus dem Text des Benutzers weisst. Arbeite die Texte immer vollständig durch und kürze nicht. Mache keine Annahmen. Schreibe einfach und klar und immer in deutscher Sprache.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Soweit Sie oder andere Personen in Ihrem Haushalt einen Hund halten, müssen Sie ihn innerhalb von vier Wochen nach der Aufnahme zur Hundesteuer anmelden. Wenn der Hund aus dem Wurf einer von Ihnen gehaltenen Hündin stammt, müssen sie ihn innerhalb von vier Wochen, nachdem der Hund sechs Monate alt geworden ist, zur Hundesteuer anmelden.
+    Die An- und Abmeldepflicht gilt auch für Hunde, die nicht von natürlichen Personen oder nicht aus persönlichen Zwecken gehalten werden. Wollen Sie einen gefährlichen Hund oder einen Hund einer bestimmter Rasse nach dem Landeshundegesetz halten, benötigen Sie eine ordnungsbehördliche Erlaubnis. Zur Anmeldung können Sie das neue Online-Anmeldeverfahren nutzen. Weitere Infos siehe unten unter "Online anmelden".
+    """
+    MESSAGE assistant """
+    Wenn Sie einen Hund haben:
+    Dann müssen Sie Hunde-Steuer bezahlen.
+    Es ist Ihre Pflicht:
+    Ihren Hund anzumelden.
+    Das gilt zum Beispiel auch:
+    	• wenn der Hund einem Verein gehört
+    	• oder wenn es ein Wach-Hund bei einer Firma ist.
+    Wenn Sie sich einen Hund anschaffen:
+    Dann müssen Sie den Hund innerhalb von 4 Wochen anmelden.
+    Wenn Ihre Hündin schwanger ist und Babys bekommt:
+    Dann dürfen die jungen Hunde 6 Monate alt werden.
+    Nach den 6 Monaten müssen Sie die Hunde innerhalb von 4 Wochen anmelden.
+    Bei der Hunde-Steuer gibt es Ermäßigungen.
+    Das heißt: Sie müssen bei bestimmten Gründen
+    weniger Hunde-Steuer oder keine Hunde-Steuer bezahlen.
+    Halten Sie einen gefährlichen Hund?
+    Dann benötigen Sie eine Erlaubnis von der Behörde.
+    Sie können Ihren Hund digital anmelden.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Der Bevölkerung wird nahegelegt, sich von den Einrichtungen der übenden Truppen fernzuhalten. Auf die Gefahren, die von liegengebliebenen Sprengmitteln, Fundmunition und dergleichen ausgehen, wird besonders hingewiesen. Das Sammeln, der Erwerb, der Besitz und der Verkauf dieser Gegenstände ist verboten und kann nach den Vorschriften des Strafgesetzbuches als Unterschlagung, Diebstahl oder Hehlerei sowie nach den Waffen und sprengstoffrechtlichen Bestimmungen geahndet werden.
+    """
+    MESSAGE assistant """
+    Das Gebiet, wo die Soldaten der Bundeswehr üben, ist gefährlich.
+    Die Verwaltung von Kreis XYZ sagt: "Geht nicht dorthin."
+
+    Achtung:
+    Dort gibt es gefährliche Dinge wie:
+    Bomben,
+    Munition und
+    andere gefährliche Sachen.
+
+    Diese Dinge darf man nicht:
+    sammeln,
+    kaufen,
+    besitzen oder
+    verkaufen.
+
+    Wenn man das macht, ist das eine Straftat.
+    Man kann bestraft werden wegen:
+    Diebstahl oder
+    dem Waffen- und Sprengstoffgesetz.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Für bauliche Maßnahmen zur Anpassung von bestehendem Miet- und Eigenwohnraum an die Belange von Menschen mit Behinderung können Eigentümer ein leistungsfreies Baudarlehen bis zu 10.000 Euro erhalten (im Ergebnis ein Zuschuss). Der geförderte Wohnraum muss 5 Jahre von einem Menschen mit Behinderung belegt werden.
+    """
+    MESSAGE assistant """
+    Menschen mit Behinderung sollen ohne Hindernisse wohnen können.
+    Dafür muss man oft die Wohnung umbauen.
+    Das kostet viel Geld.
+    Eigentümer können dafür bis zu 10.000 Euro bekommen.
+    Im Vertrag steht, was man beachten muss.
+    Eine Regel ist: Die Wohnung muss fünf Jahre von einem Menschen mit Behinderung genutzt werden.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Ich habe meinem guten Freund Leo ein Buch über die Geschichte von Berlin geliehen.
+    """
+    MESSAGE assistant """
+    Leo ist ein guter Freund von mir.
+    Ich habe ihm ein Buch geliehen.
+    Das Buch ist über die Geschichte von Berlin.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Abholnachricht
+
+    Sehr geehrte Frau xy, Sehr geehrter Herr qz,
+    nach Erhalt Ihres PIN-Briefes können Sie Ihren neuen Personalausweis innerhalb unserer Öffnungszeiten abholen. Bringen Sie bitte Ihren bisherigen Personalausweis und die untenstehende Erklärung ausgefüllt und unterschrieben mit. Die Gebühr wurde bereits bei der Antragstellung entrichtet.
+    """
+    MESSAGE assistant """
+    Abhol·nachricht
+    Sehr geehrte Frau xy
+    Sehr geehrter Herr qz
+    Sie bekommen von uns einen Brief.
+    In dem Brief ist eine PIN.
+    PIN bedeutet
+    persönliche Identifikations·nummer.
+    Eine PIN ist eine Geheim·zahl.
+    Zum Beispiel:
+    • 1234
+    Mit dem Brief
+    und der PIN können Sie
+    Ihren neuen Ausweis bei uns abholen.
+    Um den Ausweis abzuholen brauchen Sie:
+    • Den Ausweis den Sie gerade haben.
+    • Die Erklärung unten auf diesem Brief.
+    • Die Erklärung müssen Sie ausfüllen
+    und unterschreiben.
+    Den Ausweis haben Sie schon bezahlt.
+    Sie brauchen für den Ausweis
+    kein Geld mehr mitbringen.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Zur Abholung des Ausweises können Sie eine andere Person schriftlich bevollmächtigen. Diese Person muss sich mit einem gültigen Dokument ausweisen (Ausweis oder Pass).
+    """
+    MESSAGE assistant """
+    Wenn Sie keine Zeit haben,
+    kann auch eine andere Person
+    für Sie den Ausweis abholen.
+    Die Person muss von Ihnen
+    eine Erlaubnis dafür bekommen.
+    Die Person muss einen Ausweis
+    mitbringen.
+    Sie müssen die Erlaubnis aufschreiben.
+    Sie müssen die Erlaubnis unterschreiben.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Alle Menschen haben laut dem Übereinkommen über die Rechte von Menschen mit Behinderungen der Vereinten Nationen (UN-Behindertenrechtskonvention) das Recht auf barrierefreie Informationen und Kommunikation. Für Menschen mit Lese- und Lernschwierigkeiten trägt Leichte Sprache wesentlich dazu bei. In Deutschland regelt das Behindertengleichstellungsgesetz, in welchen Fällen Leichte Sprache bei Behörden, z. B. bezüglich Informationen, Verträgen und Anträgen, zur Anwendung kommt.
+
+    Dieses Dokument soll insbesondere dazu dienen, die gesetzlichen Anforderungen zur Verwendung von Leichter Sprache zu präzisieren. Damit unterstützt es z. B. öffentliche Stellen in Bund, Ländern und Kommunen, den gesetzlichen Vorgaben Rechnung zu tragen. Es kann darüber hinaus auch andere Organisationen bei der Verwendung Leichter Sprache unterstützen.
+    """
+    MESSAGE assistant """
+    Alle Menschen haben das Recht,
+    Informationen ohne Probleme zu verstehen.
+    Sie sollen sich leicht mit anderen Menschen
+    austauschen können.
+    Das nennt man auch: barrierefreie Kommunikation.
+
+    Dieses Recht haben die Vereinten Nationen beschlossen.
+    Man nennt die Vereinten Nationen auch: UN.
+    UN ist eine Abkürzung.
+    Die Abkürzung bedeutet: United Nations.
+    Das ist ein englisches Wort.
+    Es bedeutet: Vereinte Nationen.
+    Man spricht es so aus: Ju-nai-ted Näi-schens.
+    Zu den Vereinten Nationen gehören fast alle Länder auf der Welt.
+    Sie wollen gemeinsam das Leben für Menschen auf der Welt besser machen.
+
+    Menschen mit Lern-Schwierigkeiten brauchen Leichte Sprache.
+    Nur so können sie Informationen ohne Probleme verstehen.
+
+    In Deutschland gibt es dafür ein Gesetz.
+    Es heißt: Behinderten-Gleichstellungs-Gesetz.
+    In diesem Gesetz steht,
+    wann Behörden Leichte Sprache benutzen müssen.
+    Eine Behörde ist zum Beispiel:
+    das Sozial-Amt oder das Bürger-Amt.
+    Eine Behörde braucht Leichte Sprache zum Beispiel für:
+    • Anträge
+    • Verträge
+    • Informationen
+
+    Dieser Text soll genau sagen,
+    wie man in Deutschland in Leichter Sprache schreiben und sprechen soll.
+    Das hilft allen Behörden in Deutschland.
+    Dann wissen sie:
+    So soll Leichte Sprache am besten gemacht sein.
+    So steht es im Gesetz.
+
+    Dieser Text kann allen Menschen helfen,
+    die in Leichter Sprache schreiben oder sprechen wollen.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    B - Berechtigung zur Mitnahme einer Begleitperson
+
+    Zur Mitnahme einer Begleitperson sind schwerbehinderte Menschen berechtigt, die bei der Benutzung von öffentlichen Verkehrsmitteln infolge ihrer Behinderung regelmäßig auf Hilfe angewiesen sind. Die Feststellung bedeutet nicht, dass die schwerbehinderte Person, wenn sie nicht in Begleitung ist, eine Gefahr für sich oder für andere darstellt. Bei Blinden, Ohnhändern und Querschnittgelähmten ist die Berechtigung zur Mitnahme einer Begleitperson stets anzunehmen.
+    """
+    MESSAGE assistant """
+    Was bedeutet der Buchstabe B
+    im Schwer·behinderten·ausweis?
+    B bedeutet Begleit·person.
+    Das heißt der Mensch mit Schwer·behinderung kann einen andere Person in öffentlich Verkehrs·mitteln mitnehmen.
+    Wenn der Mensch Hilfe braucht.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Hinweise zur Antragstellung beim Landratsamt
+
+    Der Antrag ist beim zuständigen Landratsamt (siehe Seite 4) mit dem dafür vorgesehenen Formblatt zu stellen. Sie können den Antrag auch formlos stellen und erhalten dann das Antragsformular zugesangt.
+
+    Bitte füllen Sie den Antrag möglichst vollständig und gut leserlich aus; wenn Sie es wünschen, ist Ihnen das Landratsamt, die Stadt- oder Gemeindeverwaltung, die Fürsorgestelle für Kriegsopfer oder das Integrationsamt dabei behilflich.
+
+    Sie können zur Beschleunigung des Verfahrens selbst erheblich beitragen, wenn Sie dem Antrag umfassende Arztberichte mit genauer Beschreibung des Befundes und des Funktionsausfalls oder die bei ihrem Hausarzt befindlichen Untersuchungsunterlagen, wie z. B. Facharztbriefe, Krankenhausberichte, Kurschlussgutachten, Röntgenbefunde beifügen, soweit sie die Gesundheitsstörungen betreffen. Ärztliche Bescheinigungen, die lediglich die geäußerten Klagen und Beschwerden enthalten, reichen nicht aus. Eine Kostenerstattung für eingereichte Atteste kann nicht zugesichert werden.
+
+    Das Landratsamt ist bestrebt, über ihren Antrag alsbald zu entscheiden. Die Zahl der eingehenden Anträge ist jedoch so groß, dass eine Bearbeitungsdauer von einigen Monaten nicht ausgeschlossen werden kann.
+    """
+    MESSAGE assistant """
+    So stellen Sie einen Antrag beim Land·rats·amt:
+
+    Den Antrag müssen Sie
+    beim richtigen Land·rats·amt stellen.
+    Mehr dazu steht auf Seite 4.
+    Füllen Sie bitte das Form·blatt zum Antrag aus.
+    Wenn Sie das nicht tun,
+    dann bekommen Sie den Antrag per Post.
+
+    Bitte füllen Sie den Antrag ganz aus.
+    Schreiben Sie so,
+    dass es gut zu lesen ist.
+    Sie können dazu Hilfe bekommen.
+    Zum Beispiel:
+    • Im Land·rats·amt
+    • Im Rat·haus
+
+    Sie können mithelfen, damit wir Ihren Antrag schnell entscheiden können.
+    Dazu schicken Sie uns bitte wichtige Briefe von Ihrem Arzt oder Ihrer Ärztin.
+    Zum Beispiel:
+    • Berichte
+
+    Das Land·rats·amt will schnell
+    über Ihren Antrag entscheiden.
+    Das Land·rats·amt bekommt sehr viele Anträge.
+    Aus diesem Grund kann die Entscheidung
+    einige Monate dauern.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Kindertagesstätten
+
+    In unserer Gemeinde gibt es drei Kinderkrippen und vier Kindergärten. Die Trägerschaft liegt bei der Gemeinde sowie bei der evangelischen Kirche. Es kann zwischen verschiedenen Öffnungszeiten gewählt werden, von den Regelöffnungszeiten bis hin zur Ganztagesbetreuung.
+    """
+    MESSAGE assistant """
+    Kinder·tages·stätte
+    In unserer Gemeinde gibt es
+    • 3 Kinder·krippen
+    • 4 Kinder·gärten.
+
+    Die Kinder·krippen und die Kinder·gärten gehören zu der Gemeinde.
+    Und zu der evangelischen Kirche.
+
+    Die Kinder·krippen und die Kinder·gärten haben verschiedene Öffnungs·zeiten.
+    Die Eltern können sich entscheiden, ob ihr Kind den ganzen Tag betreut wird.
+    Sie können das Kind schon am Nachmittag abholen.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Das vorliegende Dokument enthält Empfehlungen für das Übersetzen von Texten in Deutsche Leichte Sprache, das Verfassen von Texten in Deutscher Leichter Sprache sowie das Gestalten von Inhalten in Leichter Sprache. Es beschreibt Möglichkeiten zur Verbesserung der Verständlichkeit und Lesbarkeit von Texten und Inhalten für Menschen mit Lernschwierigkeiten und weitere Personen, die von Leichter Sprache profitieren.
+
+    Dieses Dokument enthält sprachliche Empfehlungen zu Wort-, Satz- und Textebene in Leichte-Sprache-Texten sowie zur Einbettung dieser Texte in Nutzungssituationen. Es enthält darüber hinaus Empfehlungen zur visuellen Gestaltung von Leichte-Sprache-Texten. Des Weiteren werden Empfehlungen zur Nutzung von Leichter Sprache in verschiedenen Medienformaten gegeben. Das Dokument beschreibt den Prozess der Erstellung von Texten und Inhalten in Leichter Sprache. Schließlich gibt es Empfehlungen zu den notwendigen Qualifikationen von Textschaffenden, Prüferinnen und Prüfern sowie Gestalterinnen und Gestaltern.
+
+    Dieses Dokument richtet sich an alle an der Erstellung von Texten und Inhalten in Leichter Sprache beteiligten Personen sowie Auftraggeberinnen und Auftraggeber. Die Empfehlungen dieses Dokuments können der Qualitätssicherung und als Kriterien bei Ausschreibungen dienen.
+    """
+    MESSAGE assistant """
+    In diesem Text stehen Empfehlungen für Deutsche Leichte Sprache.
+    Empfehlungen sind Tipps.
+    Sie sagen, wie man etwas am besten macht.
+
+    In diesem Text kann man lesen:
+    • So übersetzt man Texte in Leichte Sprache.
+    • So schreibt man Texte in Leichter Sprache.
+    • So sehen Texte in Leichter Sprache aus.
+    • So kann man Texte in Leichter Sprache besser verstehen und lesen.
+    • So sollen Texte in Leichter Sprache in den Medien sein.
+    Medien sind zum Beispiel: Internet-Seiten, Videos oder Zeitungen
+    • Das wird gemacht,
+    bevor ein Text in Leichter Sprache fertig ist.
+    • Das müssen Menschen können,
+    wenn sie einen Text in Leichter Sprache schreiben wollen.
+
+    Für diese Menschen ist der Text gemacht:
+    • Menschen, die an Texten in Leichter Sprache mitarbeiten.
+    • Menschen, die Texte in Leichte Sprache übersetzen lassen möchten.
+    Das sind die Auftrag-Geberinnen und Auftrag-Geber.
+
+    Wenn die Empfehlungen aus diesem Text eingehalten werden,
+    kann man sagen: Ein Text ist gut.
+    Man sagt auch: Der Text hat eine gute Qualität.
+    Es ist gut, wenn sich viele Menschen an die Empfehlungen halten.
+    Dann wird Leichte Sprache einheitlicher.
+    Das heißt: Alle machen es ähnlich.
+    Dann wissen alle: So kann man einen Text in Leichter Sprache schreiben.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Jugendarbeit
+
+    In unserer Gemeinde findet eine offene und eine aufsuchende Jugendarbeit statt. In unserem Jugendhaus finden regelmäßig Aktivitäten für Jugendliche statt.
+    """
+    MESSAGE assistant """
+    Jugend·arbeit
+
+    In unserer Gemeinde gibt es Jugend·arbeit.
+    Alle Jugendlichen können mitmachen.
+    Das kostet nichts.
+
+    In unserer Gemeinde gibt es ein Jugend·haus.
+    Dort gibt es verschiedene Angebote für Jugendliche.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Sozialstation
+
+    Die Sozialstation geht dem Wunsch vieler älterer, kranker und pflegebedürftiger Menschen nach, zu Hause in vertrauter Umgebung bleiben zu können. Die Helferinnen und Helfer sehen ihre Aufgabe darin, Hilfe und Unterstützung bei der Pflege, Versorgung und Betreuung zu bieten. Ziel ist es, die Selbstständigkeit und Mobilität der Betroffenen zu fördern und erhalten. Die ausgebildeten Fachkräfte wirken durch gezielte Beratung und Anleitung darauf hin, die Familien in die Betreuung miteinzubeziehen.
+
+    Die Sozialstation ist für Sie da und bietet unter anderem:
+    - Kranken- und Altenpflege zu Hause (z. B. Hilfe bei der Körperpflege)
+    - Ausführung ärztlicher Verordnungen (z. B. Verbandswechsel)
+    """
+    MESSAGE assistant """
+    Sozial·station
+
+    Die Mitarbeiter und Mitarbeiterinnen von der Sozial·station unterstützen die Menschen zu Hause.
+
+    Zum Beispiel:
+    Bei der Pflege von alten Menschen.
+    Bei der Pflege von kranken Menschen.
+
+    Sie beraten die Familie bei der Pflege und geben Tipps.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Was ist das Netzwerk?
+    Wir …
+    •	halten Vorträge über Leichte Sprache z.B. bei Tagungen.
+    •	engagieren uns in politischen Gremien.
+    •	vernetzen uns mit anderen Vereinen und Verbänden.
+    •	betreiben Lobby-Arbeit für Barrierefreiheit.
+    •	vermitteln unsere Botschafter für Leichte Sprache in
+    Unternehmen, Behörden oder zu Veranstaltungen.
+    •	arbeiten beim DIN-SPEC-Verfahren zu Leichter Sprache mit.
+    •	sind mit Sprachwissenschaftler:innen in Kontakt.
+    •	lassen in unseren Arbeitsgruppen die Köpfe rauchen.
+    •	treffen uns zur jährlichen Mitgliederversammlung.
+    •	begegnen uns in den Regionalgruppen.
+    •	publizieren auch selbst in oder über Leichte Sprache.
+
+    Unser Verein hat rund 300 Mitglieder aus Deutschland, Österreich, der Schweiz, Italien, Luxemburg, den Niederlanden und Frankreich.
+
+    Das Netzwerk Leichte Sprache gibt es seit 2006, seit 2013 sind wir ein gemeinnütziger Verein.
+
+    Unsere Mitglieder sind Übersetzer*innen und Prüfer*innen für Leichte Sprache, Fans einer barrierefreien Welt für alle, Wissenschaftler*innen und Politiker*innen, Vereine und Institutionen oder Übersetzungsbüros und Prüfbüros.
+
+    Das ist uns wichtig: Wir leben Inklusion, ohne lang darüber zu reden.
+    """
+    MESSAGE assistant """
+    Was ist das Netzwerk?
+    Das Netzwerk setzt sich für Leichte Sprache ein:
+    •	Im Alltag
+    •	In der Politik
+    •	In den Ämtern
+    Das Netzwerk besteht seit dem Jahr 2006.
+    Das Netzwerk ist seit dem Jahr 2013 ein Verein:
+    Im Verein arbeiten viele Menschen zusammen.
+
+    Zum Beispiel:
+    • Das Netzwerk verbreitet die Leichte Sprache.
+    • Das Netzwerk stärkt Menschen mit Lern-Schwierigkeiten.
+    • Das Netzwerk möchte ein Recht auf Leichte Sprache für alle.
+    Der Verein Netzwerk Leichte Sprache e. V. ist gemein-nützig.
+    Das bedeutet:
+    Die Arbeit vom Verein ist für alle Menschen.
+    Der Verein ist wichtig für die Gesellschaft.
+
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Es gibt keine normativen Verweisungen in diesem Dokument.
+    """
+    MESSAGE assistant """
+    Normen sind Regeln.
+    Die DIN ist ein Beispiel für eine Norm.
+    In diesem Dokument gibt es keine Verweise auf andere Normen.
+    Das bedeutet: Der Text weist nicht auf andere Normen hin.
+    """
+  Modelfile_llama31_LS_fs: |
+    FROM llama3.1
+    PARAMETER temperature 0.2
+    SYSTEM """
+    Du bist ein hilfreicher Assistent, der Texte in Leichte Sprache, Sprachniveau A2, umschreibt. Sei immer wahrheitsgemäß und objektiv. Schreibe nur das, was du sicher aus dem Text des Benutzers weisst. Arbeite die Texte immer vollständig durch und kürze nicht. Mache keine Annahmen. Schreibe einfach und klar und immer in deutscher Sprache.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Soweit Sie oder andere Personen in Ihrem Haushalt einen Hund halten, müssen Sie ihn innerhalb von vier Wochen nach der Aufnahme zur Hundesteuer anmelden. Wenn der Hund aus dem Wurf einer von Ihnen gehaltenen Hündin stammt, müssen sie ihn innerhalb von vier Wochen, nachdem der Hund sechs Monate alt geworden ist, zur Hundesteuer anmelden.
+    Die An- und Abmeldepflicht gilt auch für Hunde, die nicht von natürlichen Personen oder nicht aus persönlichen Zwecken gehalten werden. Wollen Sie einen gefährlichen Hund oder einen Hund einer bestimmter Rasse nach dem Landeshundegesetz halten, benötigen Sie eine ordnungsbehördliche Erlaubnis. Zur Anmeldung können Sie das neue Online-Anmeldeverfahren nutzen. Weitere Infos siehe unten unter "Online anmelden".
+    """
+    MESSAGE assistant """
+    Wenn Sie einen Hund haben:
+    Dann müssen Sie Hunde-Steuer bezahlen.
+    Es ist Ihre Pflicht:
+    Ihren Hund anzumelden.
+    Das gilt zum Beispiel auch:
+    	• wenn der Hund einem Verein gehört
+    	• oder wenn es ein Wach-Hund bei einer Firma ist.
+    Wenn Sie sich einen Hund anschaffen:
+    Dann müssen Sie den Hund innerhalb von 4 Wochen anmelden.
+    Wenn Ihre Hündin schwanger ist und Babys bekommt:
+    Dann dürfen die jungen Hunde 6 Monate alt werden.
+    Nach den 6 Monaten müssen Sie die Hunde innerhalb von 4 Wochen anmelden.
+    Bei der Hunde-Steuer gibt es Ermäßigungen.
+    Das heißt: Sie müssen bei bestimmten Gründen
+    weniger Hunde-Steuer oder keine Hunde-Steuer bezahlen.
+    Halten Sie einen gefährlichen Hund?
+    Dann benötigen Sie eine Erlaubnis von der Behörde.
+    Sie können Ihren Hund digital anmelden.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Der Bevölkerung wird nahegelegt, sich von den Einrichtungen der übenden Truppen fernzuhalten. Auf die Gefahren, die von liegengebliebenen Sprengmitteln, Fundmunition und dergleichen ausgehen, wird besonders hingewiesen. Das Sammeln, der Erwerb, der Besitz und der Verkauf dieser Gegenstände ist verboten und kann nach den Vorschriften des Strafgesetzbuches als Unterschlagung, Diebstahl oder Hehlerei sowie nach den Waffen und sprengstoffrechtlichen Bestimmungen geahndet werden.
+    """
+    MESSAGE assistant """
+    Das Gebiet, wo die Soldaten der Bundeswehr üben, ist gefährlich.
+    Die Verwaltung von Kreis XYZ sagt: "Geht nicht dorthin."
+
+    Achtung:
+    Dort gibt es gefährliche Dinge wie:
+    Bomben,
+    Munition und
+    andere gefährliche Sachen.
+
+    Diese Dinge darf man nicht:
+    sammeln,
+    kaufen,
+    besitzen oder
+    verkaufen.
+
+    Wenn man das macht, ist das eine Straftat.
+    Man kann bestraft werden wegen:
+    Diebstahl oder
+    dem Waffen- und Sprengstoffgesetz.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Für bauliche Maßnahmen zur Anpassung von bestehendem Miet- und Eigenwohnraum an die Belange von Menschen mit Behinderung können Eigentümer ein leistungsfreies Baudarlehen bis zu 10.000 Euro erhalten (im Ergebnis ein Zuschuss). Der geförderte Wohnraum muss 5 Jahre von einem Menschen mit Behinderung belegt werden.
+    """
+    MESSAGE assistant """
+    Menschen mit Behinderung sollen ohne Hindernisse wohnen können.
+    Dafür muss man oft die Wohnung umbauen.
+    Das kostet viel Geld.
+    Eigentümer können dafür bis zu 10.000 Euro bekommen.
+    Im Vertrag steht, was man beachten muss.
+    Eine Regel ist: Die Wohnung muss fünf Jahre von einem Menschen mit Behinderung genutzt werden.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Ich habe meinem guten Freund Leo ein Buch über die Geschichte von Berlin geliehen.
+    """
+    MESSAGE assistant """
+    Leo ist ein guter Freund von mir.
+    Ich habe ihm ein Buch geliehen.
+    Das Buch ist über die Geschichte von Berlin.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Abholnachricht
+
+    Sehr geehrte Frau xy, Sehr geehrter Herr qz,
+    nach Erhalt Ihres PIN-Briefes können Sie Ihren neuen Personalausweis innerhalb unserer Öffnungszeiten abholen. Bringen Sie bitte Ihren bisherigen Personalausweis und die untenstehende Erklärung ausgefüllt und unterschrieben mit. Die Gebühr wurde bereits bei der Antragstellung entrichtet.
+    """
+    MESSAGE assistant """
+    Abhol·nachricht
+    Sehr geehrte Frau xy
+    Sehr geehrter Herr qz
+    Sie bekommen von uns einen Brief.
+    In dem Brief ist eine PIN.
+    PIN bedeutet
+    persönliche Identifikations·nummer.
+    Eine PIN ist eine Geheim·zahl.
+    Zum Beispiel:
+    • 1234
+    Mit dem Brief
+    und der PIN können Sie
+    Ihren neuen Ausweis bei uns abholen.
+    Um den Ausweis abzuholen brauchen Sie:
+    • Den Ausweis den Sie gerade haben.
+    • Die Erklärung unten auf diesem Brief.
+    • Die Erklärung müssen Sie ausfüllen
+    und unterschreiben.
+    Den Ausweis haben Sie schon bezahlt.
+    Sie brauchen für den Ausweis
+    kein Geld mehr mitbringen.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Zur Abholung des Ausweises können Sie eine andere Person schriftlich bevollmächtigen. Diese Person muss sich mit einem gültigen Dokument ausweisen (Ausweis oder Pass).
+    """
+    MESSAGE assistant """
+    Wenn Sie keine Zeit haben,
+    kann auch eine andere Person
+    für Sie den Ausweis abholen.
+    Die Person muss von Ihnen
+    eine Erlaubnis dafür bekommen.
+    Die Person muss einen Ausweis
+    mitbringen.
+    Sie müssen die Erlaubnis aufschreiben.
+    Sie müssen die Erlaubnis unterschreiben.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Alle Menschen haben laut dem Übereinkommen über die Rechte von Menschen mit Behinderungen der Vereinten Nationen (UN-Behindertenrechtskonvention) das Recht auf barrierefreie Informationen und Kommunikation. Für Menschen mit Lese- und Lernschwierigkeiten trägt Leichte Sprache wesentlich dazu bei. In Deutschland regelt das Behindertengleichstellungsgesetz, in welchen Fällen Leichte Sprache bei Behörden, z. B. bezüglich Informationen, Verträgen und Anträgen, zur Anwendung kommt.
+
+    Dieses Dokument soll insbesondere dazu dienen, die gesetzlichen Anforderungen zur Verwendung von Leichter Sprache zu präzisieren. Damit unterstützt es z. B. öffentliche Stellen in Bund, Ländern und Kommunen, den gesetzlichen Vorgaben Rechnung zu tragen. Es kann darüber hinaus auch andere Organisationen bei der Verwendung Leichter Sprache unterstützen.
+    """
+    MESSAGE assistant """
+    Alle Menschen haben das Recht,
+    Informationen ohne Probleme zu verstehen.
+    Sie sollen sich leicht mit anderen Menschen
+    austauschen können.
+    Das nennt man auch: barrierefreie Kommunikation.
+
+    Dieses Recht haben die Vereinten Nationen beschlossen.
+    Man nennt die Vereinten Nationen auch: UN.
+    UN ist eine Abkürzung.
+    Die Abkürzung bedeutet: United Nations.
+    Das ist ein englisches Wort.
+    Es bedeutet: Vereinte Nationen.
+    Man spricht es so aus: Ju-nai-ted Näi-schens.
+    Zu den Vereinten Nationen gehören fast alle Länder auf der Welt.
+    Sie wollen gemeinsam das Leben für Menschen auf der Welt besser machen.
+
+    Menschen mit Lern-Schwierigkeiten brauchen Leichte Sprache.
+    Nur so können sie Informationen ohne Probleme verstehen.
+
+    In Deutschland gibt es dafür ein Gesetz.
+    Es heißt: Behinderten-Gleichstellungs-Gesetz.
+    In diesem Gesetz steht,
+    wann Behörden Leichte Sprache benutzen müssen.
+    Eine Behörde ist zum Beispiel:
+    das Sozial-Amt oder das Bürger-Amt.
+    Eine Behörde braucht Leichte Sprache zum Beispiel für:
+    • Anträge
+    • Verträge
+    • Informationen
+
+    Dieser Text soll genau sagen,
+    wie man in Deutschland in Leichter Sprache schreiben und sprechen soll.
+    Das hilft allen Behörden in Deutschland.
+    Dann wissen sie:
+    So soll Leichte Sprache am besten gemacht sein.
+    So steht es im Gesetz.
+
+    Dieser Text kann allen Menschen helfen,
+    die in Leichter Sprache schreiben oder sprechen wollen.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    B - Berechtigung zur Mitnahme einer Begleitperson
+
+    Zur Mitnahme einer Begleitperson sind schwerbehinderte Menschen berechtigt, die bei der Benutzung von öffentlichen Verkehrsmitteln infolge ihrer Behinderung regelmäßig auf Hilfe angewiesen sind. Die Feststellung bedeutet nicht, dass die schwerbehinderte Person, wenn sie nicht in Begleitung ist, eine Gefahr für sich oder für andere darstellt. Bei Blinden, Ohnhändern und Querschnittgelähmten ist die Berechtigung zur Mitnahme einer Begleitperson stets anzunehmen.
+    """
+    MESSAGE assistant """
+    Was bedeutet der Buchstabe B
+    im Schwer·behinderten·ausweis?
+    B bedeutet Begleit·person.
+    Das heißt der Mensch mit Schwer·behinderung kann einen andere Person in öffentlich Verkehrs·mitteln mitnehmen.
+    Wenn der Mensch Hilfe braucht.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Hinweise zur Antragstellung beim Landratsamt
+
+    Der Antrag ist beim zuständigen Landratsamt (siehe Seite 4) mit dem dafür vorgesehenen Formblatt zu stellen. Sie können den Antrag auch formlos stellen und erhalten dann das Antragsformular zugesangt.
+
+    Bitte füllen Sie den Antrag möglichst vollständig und gut leserlich aus; wenn Sie es wünschen, ist Ihnen das Landratsamt, die Stadt- oder Gemeindeverwaltung, die Fürsorgestelle für Kriegsopfer oder das Integrationsamt dabei behilflich.
+
+    Sie können zur Beschleunigung des Verfahrens selbst erheblich beitragen, wenn Sie dem Antrag umfassende Arztberichte mit genauer Beschreibung des Befundes und des Funktionsausfalls oder die bei ihrem Hausarzt befindlichen Untersuchungsunterlagen, wie z. B. Facharztbriefe, Krankenhausberichte, Kurschlussgutachten, Röntgenbefunde beifügen, soweit sie die Gesundheitsstörungen betreffen. Ärztliche Bescheinigungen, die lediglich die geäußerten Klagen und Beschwerden enthalten, reichen nicht aus. Eine Kostenerstattung für eingereichte Atteste kann nicht zugesichert werden.
+
+    Das Landratsamt ist bestrebt, über ihren Antrag alsbald zu entscheiden. Die Zahl der eingehenden Anträge ist jedoch so groß, dass eine Bearbeitungsdauer von einigen Monaten nicht ausgeschlossen werden kann.
+    """
+    MESSAGE assistant """
+    So stellen Sie einen Antrag beim Land·rats·amt:
+
+    Den Antrag müssen Sie
+    beim richtigen Land·rats·amt stellen.
+    Mehr dazu steht auf Seite 4.
+    Füllen Sie bitte das Form·blatt zum Antrag aus.
+    Wenn Sie das nicht tun,
+    dann bekommen Sie den Antrag per Post.
+
+    Bitte füllen Sie den Antrag ganz aus.
+    Schreiben Sie so,
+    dass es gut zu lesen ist.
+    Sie können dazu Hilfe bekommen.
+    Zum Beispiel:
+    • Im Land·rats·amt
+    • Im Rat·haus
+
+    Sie können mithelfen, damit wir Ihren Antrag schnell entscheiden können.
+    Dazu schicken Sie uns bitte wichtige Briefe von Ihrem Arzt oder Ihrer Ärztin.
+    Zum Beispiel:
+    • Berichte
+
+    Das Land·rats·amt will schnell
+    über Ihren Antrag entscheiden.
+    Das Land·rats·amt bekommt sehr viele Anträge.
+    Aus diesem Grund kann die Entscheidung
+    einige Monate dauern.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Kindertagesstätten
+
+    In unserer Gemeinde gibt es drei Kinderkrippen und vier Kindergärten. Die Trägerschaft liegt bei der Gemeinde sowie bei der evangelischen Kirche. Es kann zwischen verschiedenen Öffnungszeiten gewählt werden, von den Regelöffnungszeiten bis hin zur Ganztagesbetreuung.
+    """
+    MESSAGE assistant """
+    Kinder·tages·stätte
+    In unserer Gemeinde gibt es
+    • 3 Kinder·krippen
+    • 4 Kinder·gärten.
+
+    Die Kinder·krippen und die Kinder·gärten gehören zu der Gemeinde.
+    Und zu der evangelischen Kirche.
+
+    Die Kinder·krippen und die Kinder·gärten haben verschiedene Öffnungs·zeiten.
+    Die Eltern können sich entscheiden, ob ihr Kind den ganzen Tag betreut wird.
+    Sie können das Kind schon am Nachmittag abholen.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Das vorliegende Dokument enthält Empfehlungen für das Übersetzen von Texten in Deutsche Leichte Sprache, das Verfassen von Texten in Deutscher Leichter Sprache sowie das Gestalten von Inhalten in Leichter Sprache. Es beschreibt Möglichkeiten zur Verbesserung der Verständlichkeit und Lesbarkeit von Texten und Inhalten für Menschen mit Lernschwierigkeiten und weitere Personen, die von Leichter Sprache profitieren.
+
+    Dieses Dokument enthält sprachliche Empfehlungen zu Wort-, Satz- und Textebene in Leichte-Sprache-Texten sowie zur Einbettung dieser Texte in Nutzungssituationen. Es enthält darüber hinaus Empfehlungen zur visuellen Gestaltung von Leichte-Sprache-Texten. Des Weiteren werden Empfehlungen zur Nutzung von Leichter Sprache in verschiedenen Medienformaten gegeben. Das Dokument beschreibt den Prozess der Erstellung von Texten und Inhalten in Leichter Sprache. Schließlich gibt es Empfehlungen zu den notwendigen Qualifikationen von Textschaffenden, Prüferinnen und Prüfern sowie Gestalterinnen und Gestaltern.
+
+    Dieses Dokument richtet sich an alle an der Erstellung von Texten und Inhalten in Leichter Sprache beteiligten Personen sowie Auftraggeberinnen und Auftraggeber. Die Empfehlungen dieses Dokuments können der Qualitätssicherung und als Kriterien bei Ausschreibungen dienen.
+    """
+    MESSAGE assistant """
+    In diesem Text stehen Empfehlungen für Deutsche Leichte Sprache.
+    Empfehlungen sind Tipps.
+    Sie sagen, wie man etwas am besten macht.
+
+    In diesem Text kann man lesen:
+    • So übersetzt man Texte in Leichte Sprache.
+    • So schreibt man Texte in Leichter Sprache.
+    • So sehen Texte in Leichter Sprache aus.
+    • So kann man Texte in Leichter Sprache besser verstehen und lesen.
+    • So sollen Texte in Leichter Sprache in den Medien sein.
+    Medien sind zum Beispiel: Internet-Seiten, Videos oder Zeitungen
+    • Das wird gemacht,
+    bevor ein Text in Leichter Sprache fertig ist.
+    • Das müssen Menschen können,
+    wenn sie einen Text in Leichter Sprache schreiben wollen.
+
+    Für diese Menschen ist der Text gemacht:
+    • Menschen, die an Texten in Leichter Sprache mitarbeiten.
+    • Menschen, die Texte in Leichte Sprache übersetzen lassen möchten.
+    Das sind die Auftrag-Geberinnen und Auftrag-Geber.
+
+    Wenn die Empfehlungen aus diesem Text eingehalten werden,
+    kann man sagen: Ein Text ist gut.
+    Man sagt auch: Der Text hat eine gute Qualität.
+    Es ist gut, wenn sich viele Menschen an die Empfehlungen halten.
+    Dann wird Leichte Sprache einheitlicher.
+    Das heißt: Alle machen es ähnlich.
+    Dann wissen alle: So kann man einen Text in Leichter Sprache schreiben.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Jugendarbeit
+
+    In unserer Gemeinde findet eine offene und eine aufsuchende Jugendarbeit statt. In unserem Jugendhaus finden regelmäßig Aktivitäten für Jugendliche statt.
+    """
+    MESSAGE assistant """
+    Jugend·arbeit
+
+    In unserer Gemeinde gibt es Jugend·arbeit.
+    Alle Jugendlichen können mitmachen.
+    Das kostet nichts.
+
+    In unserer Gemeinde gibt es ein Jugend·haus.
+    Dort gibt es verschiedene Angebote für Jugendliche.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Sozialstation
+
+    Die Sozialstation geht dem Wunsch vieler älterer, kranker und pflegebedürftiger Menschen nach, zu Hause in vertrauter Umgebung bleiben zu können. Die Helferinnen und Helfer sehen ihre Aufgabe darin, Hilfe und Unterstützung bei der Pflege, Versorgung und Betreuung zu bieten. Ziel ist es, die Selbstständigkeit und Mobilität der Betroffenen zu fördern und erhalten. Die ausgebildeten Fachkräfte wirken durch gezielte Beratung und Anleitung darauf hin, die Familien in die Betreuung miteinzubeziehen.
+
+    Die Sozialstation ist für Sie da und bietet unter anderem:
+    - Kranken- und Altenpflege zu Hause (z. B. Hilfe bei der Körperpflege)
+    - Ausführung ärztlicher Verordnungen (z. B. Verbandswechsel)
+    """
+    MESSAGE assistant """
+    Sozial·station
+
+    Die Mitarbeiter und Mitarbeiterinnen von der Sozial·station unterstützen die Menschen zu Hause.
+
+    Zum Beispiel:
+    Bei der Pflege von alten Menschen.
+    Bei der Pflege von kranken Menschen.
+
+    Sie beraten die Familie bei der Pflege und geben Tipps.
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Was ist das Netzwerk?
+    Wir …
+    •	halten Vorträge über Leichte Sprache z.B. bei Tagungen.
+    •	engagieren uns in politischen Gremien.
+    •	vernetzen uns mit anderen Vereinen und Verbänden.
+    •	betreiben Lobby-Arbeit für Barrierefreiheit.
+    •	vermitteln unsere Botschafter für Leichte Sprache in
+    Unternehmen, Behörden oder zu Veranstaltungen.
+    •	arbeiten beim DIN-SPEC-Verfahren zu Leichter Sprache mit.
+    •	sind mit Sprachwissenschaftler:innen in Kontakt.
+    •	lassen in unseren Arbeitsgruppen die Köpfe rauchen.
+    •	treffen uns zur jährlichen Mitgliederversammlung.
+    •	begegnen uns in den Regionalgruppen.
+    •	publizieren auch selbst in oder über Leichte Sprache.
+
+    Unser Verein hat rund 300 Mitglieder aus Deutschland, Österreich, der Schweiz, Italien, Luxemburg, den Niederlanden und Frankreich.
+
+    Das Netzwerk Leichte Sprache gibt es seit 2006, seit 2013 sind wir ein gemeinnütziger Verein.
+
+    Unsere Mitglieder sind Übersetzer*innen und Prüfer*innen für Leichte Sprache, Fans einer barrierefreien Welt für alle, Wissenschaftler*innen und Politiker*innen, Vereine und Institutionen oder Übersetzungsbüros und Prüfbüros.
+
+    Das ist uns wichtig: Wir leben Inklusion, ohne lang darüber zu reden.
+    """
+    MESSAGE assistant """
+    Was ist das Netzwerk?
+    Das Netzwerk setzt sich für Leichte Sprache ein:
+    •	Im Alltag
+    •	In der Politik
+    •	In den Ämtern
+    Das Netzwerk besteht seit dem Jahr 2006.
+    Das Netzwerk ist seit dem Jahr 2013 ein Verein:
+    Im Verein arbeiten viele Menschen zusammen.
+
+    Zum Beispiel:
+    • Das Netzwerk verbreitet die Leichte Sprache.
+    • Das Netzwerk stärkt Menschen mit Lern-Schwierigkeiten.
+    • Das Netzwerk möchte ein Recht auf Leichte Sprache für alle.
+    Der Verein Netzwerk Leichte Sprache e. V. ist gemein-nützig.
+    Das bedeutet:
+    Die Arbeit vom Verein ist für alle Menschen.
+    Der Verein ist wichtig für die Gesellschaft.
+
+    """
+    MESSAGE user """Bitte schreibe den folgenden schwer verständlichen Text vollständig in Leichte Sprache auf dem Niveau A2 um.
+    Füge keine Erklärungen oder Kommentare hinzu, sondern nur die vereinfachte Version des folgendes Textes.
+    Text:
+
+    Es gibt keine normativen Verweisungen in diesem Dokument.
+    """
+    MESSAGE assistant """
+    Normen sind Regeln.
+    Die DIN ist ein Beispiel für eine Norm.
+    In diesem Dokument gibt es keine Verweise auf andere Normen.
+    Das bedeutet: Der Text weist nicht auf andere Normen hin.
+    """
