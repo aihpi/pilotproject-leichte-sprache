@@ -24,7 +24,7 @@ spec:
             - |
               ollama serve &
               OLLAMA_PID=$!
-              until curl -sf http://localhost:11434/api/tags > /dev/null; do sleep 2; done
+              until ollama list > /dev/null 2>&1; do sleep 2; done
               ollama pull llama3.1
               ollama pull llama3.2
               ollama create llama3.2-leichte-sprache:basic -f /modelfiles/Modelfile_llama32_LS_basic
@@ -51,6 +51,13 @@ spec:
         - name: leichte-sprache
           image: ghcr.io/aihpi/pilotproject-leichte-sprache:latest
           imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:11434/api/tags')" 2>/dev/null; do
+                sleep 3
+              done
+              exec python3 app.py
           env:
             - name: OLLAMA_HOST
               value: "http://localhost:11434"

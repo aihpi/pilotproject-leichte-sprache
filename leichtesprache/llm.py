@@ -45,11 +45,12 @@ def list_local_models() -> List:
     try:
         r = requests.get(url)
         response_dic = json.loads(r.text)
-        models_names = [model.get("name") for model in response_dic.get("models")]
+        models_names = [model.get("name") for model in response_dic.get("models", [])]
         return models_names
 
     except Exception as e:
-        logger.error(f"Exception: {e}\nResponse:{response_dic}")
+        logger.error(f"Exception: {e}")
+        return []
 
 
 if __name__ == "__main__":
