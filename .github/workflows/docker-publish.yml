@@ -1,0 +1,106 @@
+name: Build and Push pilotproject-leichte-sprache Image
+
+env:
+  IMAGE: ghcr.io/aihpi/pilotproject-leichte-sprache
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  DOCKER_BUILD_SUMMARY: false
+
+on:
+  push:
+    paths:
+      - app.py
+      - leichtesprache/**
+      - Dockerfile
+      - requirements.txt
+      - kubernetes/**
+      - .github/workflows/publish-ui-image.yml
+  workflow_dispatch:
+
+concurrency:
+  group: pilotproject-leichte-sprache-image-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Free runner disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          docker system prune -af || true
+          df -h
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short,prefix=sha-
+
+      - name: Build and push (linux/amd64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Update Kubernetes manifest
+        id: update_manifest
+        run: |
+          NEW_TAG=$(echo '${{ steps.meta.outputs.json }}' | jq -r '.tags[] | select(contains("sha-"))' | cut -d':' -f2)
+          echo "tag=$NEW_TAG" >> "$GITHUB_OUTPUT"
+
+          TARGET_FILE="kubernetes/deployments.yaml"
+
+          if [ -f "$TARGET_FILE" ]; then
+            sed -i "s|image: ${{ env.IMAGE }}:.*|image: ${{ env.IMAGE }}:${NEW_TAG}|g" "$TARGET_FILE"
+          else
+            echo "ERROR: $TARGET_FILE not found."
+            exit 1
+          fi
+
+      - name: Commit and push manifest changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          TAG_NAME="${{ steps.update_manifest.outputs.tag }}"
+
+          if git diff --exit-code kubernetes/deployments.yaml; then
+            echo "No changes to manifest. Skipping commit."
+          else
+            git add kubernetes/deployments.yaml
+            git commit -m "chore: update leichte-sprache image to ${TAG_NAME} [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
