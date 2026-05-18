@@ -23,7 +23,7 @@ def llm_generate(
         "model": model,
         "prompt": prompt,
         "stream": False,
-        "options": {"temperature": temp, "top_p": top_p, "top_k": top_k},
+        "options": {"temperature": temp, "top_p": top_p, "top_k": top_k, "num_ctx": 4096},
     }
 
     try:
