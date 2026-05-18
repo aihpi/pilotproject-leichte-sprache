@@ -14,6 +14,9 @@ spec:
       labels:
         app: leichte-sprache
     spec:
+      runtimeClassName: nvidia
+      nodeSelector:
+        accelerator: a30
       imagePullSecrets:
         - name: ghcr-credentials
       initContainers:
@@ -68,6 +71,8 @@ spec:
           env:
             - name: OLLAMA_HOST
               value: "http://localhost:11434"
+            - name: OLLAMA_MODEL
+              value: "kisz/llama3.1-leichte-sprache-ft:latest"
           ports:
             - name: http
               containerPort: 7860
@@ -114,9 +119,11 @@ spec:
             requests:
               memory: "8Gi"
               cpu: "1000m"
+              nvidia.com/gpu: "1"
             limits:
               memory: "16Gi"
               cpu: "4000m"
+              nvidia.com/gpu: "1"
       volumes:
         - name: ollama-models
           persistentVolumeClaim:

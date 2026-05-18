@@ -27,7 +27,7 @@ def llm_generate(
     }
 
     try:
-        r = requests.post(url, json=data)
+        r = requests.post(url, json=data, timeout=120)
         response_dic = json.loads(r.text)
         return response_dic.get("response", "")
 
