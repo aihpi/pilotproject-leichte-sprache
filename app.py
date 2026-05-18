@@ -19,7 +19,7 @@ DEFAULT_MODEL = (
 )
 
 
-with gr.Blocks(title="LeiSA", css="footer {visibility: hidden}") as demo:
+with gr.Blocks(title="LeiSA") as demo:
 
     # ======================================================================================================
     # LeiSA-Logo in hellblau links im Frontend
@@ -128,7 +128,6 @@ with gr.Blocks(title="LeiSA", css="footer {visibility: hidden}") as demo:
             label="Leichte Sprache",
             lines=18,
             autoscroll=True,
-            show_copy_button=True,
             elem_id="output-box",
         )
 
@@ -207,4 +206,4 @@ with gr.Blocks(title="LeiSA", css="footer {visibility: hidden}") as demo:
 
 # Start
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(css="footer {visibility: hidden}")
