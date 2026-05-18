@@ -22,6 +22,12 @@ spec:
           command: ["/bin/bash", "-c"]
           args:
             - |
+              MARKER="/root/.ollama/.setup-hash"
+              CURRENT_HASH=$(cat /modelfiles/* 2>/dev/null | sha256sum | cut -d' ' -f1)
+              if [ -f "$MARKER" ] && [ "$(cat "$MARKER" 2>/dev/null)" = "$CURRENT_HASH" ]; then
+                echo "Models already set up with current config, skipping"
+                exit 0
+              fi
               ollama serve &
               OLLAMA_PID=$!
               until ollama list > /dev/null 2>&1; do sleep 2; done
@@ -35,6 +41,7 @@ spec:
               ollama pull kisz/llama3.1-leichte-sprache-ft:latest
               kill $OLLAMA_PID
               wait $OLLAMA_PID 2>/dev/null || true
+              echo "$CURRENT_HASH" > "$MARKER"
           volumeMounts:
             - name: ollama-models
               mountPath: /root/.ollama

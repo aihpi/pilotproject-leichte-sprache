@@ -1,5 +1,6 @@
 # Basic Requirements to run the Application
 gradio>=5.0.0
+requests>=2.32.0
 # Requirements for the additional tools. Uncomment to install.
 # pandas>=2.2.2
 # textstat>=0.7.4
