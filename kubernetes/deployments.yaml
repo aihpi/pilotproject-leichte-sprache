@@ -97,6 +97,9 @@ spec:
               cpu: "500m"
         - name: ollama
           image: ollama/ollama:latest
+          env:
+            - name: OLLAMA_KEEP_ALIVE
+              value: "-1"
           ports:
             - name: ollama
               containerPort: 11434
