@@ -45,6 +45,9 @@ with gr.Blocks(title="LeiSA") as demo:
                 align-items: center;
                 grid-template-columns: 1fr auto 1fr;
                 margin-bottom: 25px;
+                background-color: #0A286D;
+                padding: 10px;
+                border-radius: 10px;
             }
 
             #logo-container {

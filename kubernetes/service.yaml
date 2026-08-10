@@ -7,7 +7,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: leichte-sprache
+    app: leichte-sprache-proxy
   ports:
     - name: http
       port: 7860

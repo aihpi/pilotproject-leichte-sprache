@@ -67,6 +67,17 @@ spec:
               until python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:11434/api/tags')" 2>/dev/null; do
                 sleep 3
               done
+              echo "Pre-warming model into GPU..."
+              python3 -c "
+import requests, os
+requests.post('http://localhost:11434/api/generate', json={
+  'model': os.environ.get('OLLAMA_MODEL', 'kisz/llama3.1-leichte-sprache-ft:latest'),
+  'prompt': 'hi',
+  'stream': False,
+  'keep_alive': -1
+}, timeout=300)
+print('Model warm.')
+"
               exec python3 app.py
           env:
             - name: OLLAMA_HOST
@@ -80,13 +91,13 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 180
             periodSeconds: 30
           resources:
             requests:
