@@ -59,7 +59,7 @@ spec:
               cpu: "4000m"
       containers:
         - name: leichte-sprache
-          image: ghcr.io/aihpi/pilotproject-leichte-sprache:sha-4fe798b
+          image: ghcr.io/aihpi/pilotproject-leichte-sprache:sha-932fb66
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args:
