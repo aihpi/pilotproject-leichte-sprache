@@ -1,0 +1,31 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: leichte-sprache
+spec:
+  scaleTargetRef:
+    name: leichte-sprache
+    kind: Deployment
+    apiVersion: apps/v1
+    service: leichte-sprache-backend
+    port: 7860
+  hosts:
+    - "10.127.129.19"
+    - "10.127.129.19:7860"
+    - "leisa.aisc.hpi.de"
+    - "leisa.aisc.hpi.de:7860"
+    - "leisa.aisc.hpi.de:443"
+    - "leisa.aisc.hpi.de:80"
+    - "leichte-sprache.leichte-sprache.svc.cluster.local"
+    - "leichte-sprache.leichte-sprache.svc.cluster.local:7860"
+    - "leichte-sprache.leichte-sprache.svc"
+    - "leichte-sprache.leichte-sprache"
+    - "leichte-sprache"
+    - "localhost"
+    - "localhost:7860"
+  pathPrefixes:
+    - /
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300  # Scale down to 0 after 5 minutes of idle time

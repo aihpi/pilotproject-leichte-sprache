@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leichte-sprache-proxy
+  labels:
+    app: leichte-sprache-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leichte-sprache-proxy
+  template:
+    metadata:
+      labels:
+        app: leichte-sprache-proxy
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 7860
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+      volumes:
+      - name: config-volume
+        configMap:
+          name: leichte-sprache-proxy-config

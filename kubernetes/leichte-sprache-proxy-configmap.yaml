@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: leichte-sprache-proxy-config
+data:
+  nginx.conf: |
+    events {
+        worker_connections 1024;
+    }
+    http {
+        map $http_x_forwarded_proto $pass_proto {
+            default $http_x_forwarded_proto;
+            ""      $scheme;
+        }
+
+        server {
+            listen 7860;
+            client_max_body_size 0; # Allow large inputs/uploads
+
+            # Route WebSockets directly to the backend to bypass KEDA HTTP interceptor limitation
+            error_page 418 = @websocket;
+
+            location / {
+                if ($http_upgrade = "websocket") {
+                    return 418;
+                }
+
+                proxy_pass http://keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local:8080;
+                proxy_set_header Host $http_host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $pass_proto;
+                proxy_set_header Accept-Encoding "";
+
+                # Rewrite absolute http URLs to https to prevent mixed content blocking
+                sub_filter 'http://leisa.aisc.hpi.de' 'https://leisa.aisc.hpi.de';
+                sub_filter_once off;
+                sub_filter_types *;
+
+                # Disable buffering for real-time streaming
+                proxy_buffering off;
+                proxy_cache off;
+                chunked_transfer_encoding on;
+
+                # High timeouts to accommodate cold-start scale-up and model setup
+                proxy_read_timeout 600s;
+                proxy_connect_timeout 600s;
+                proxy_send_timeout 600s;
+            }
+
+            location @websocket {
+                proxy_pass http://leichte-sprache-backend.leichte-sprache.svc.cluster.local:7860;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_set_header Host $http_host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $pass_proto;
+
+                proxy_read_timeout 600s;
+                proxy_connect_timeout 600s;
+                proxy_send_timeout 600s;
+            }
+        }
+    }
